@@ -30,7 +30,6 @@ const formatDict = {
   number: '<',
   operator: '[',
   function: '{',
-  bracket: '⟨',
   none: ''
 };
 
@@ -39,7 +38,6 @@ const formatDictClosing = {
   number: '>',
   operator: ']',
   function: '}',
-  bracket: '⟩',
   none: ''
 };
 
@@ -282,7 +280,7 @@ function formatExpression (ex) {
       operators: []
       functions: {}
   */
-  let chunks = ex.split('');
+  let chunks = ex.replace(/\(/g,"⟨").replace(/\)/g,"⟩").split('');
   let lastElemType = getType(chunks[0]);
   let formatted = formatDict[lastElemType];
   // let fragmentClosed = false;
@@ -316,8 +314,6 @@ function getType (elem) {
     return 'operator';
   } else if (/[\w∛√]/.test(elem)) {
     return 'function';
-  } else if (/[\\(\\)]/.test(elem)) {
-    return 'bracket';
   } else {
     return 'none';
   }
