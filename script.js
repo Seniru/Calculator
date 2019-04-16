@@ -293,7 +293,7 @@ function formatExpression (ex) {
       // fragmentClosed = false;
     } else {
       // TODO: search a way to format brackets -> Line 296 originally doesn't had that ternary operation
-      formatted += formatDictClosing[lastElemType] + formatDict[getType(c)] + getType(c) === 'bracket' ? '' : c;
+      formatted += formatDictClosing[lastElemType] + formatDict[getType(c)] +  c;
       lastElemType = getType(c);
     }
   }
