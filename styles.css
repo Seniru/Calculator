@@ -1,0 +1,46 @@
+#expressions {
+  background-color: #e0e0e0;
+  width: 100%;
+  height: 26px;
+}
+
+#expressions > input, select {
+  width: 48px;
+  text-align: center;
+  background-color: transparent;
+  border: 0;
+  margin: -5px;
+}
+
+#input-panel {
+  width: 100%;
+  height: 30px;
+  font-size: 20px;
+}
+
+#normal {
+  position: absolute;
+  width: 47%;
+  height: 80%;
+  padding-top: 10%;
+}
+
+#advanced {
+  width: 50%;
+  position: absolute;
+  left: 50%;
+  padding-top: 10%;
+  height: 80%;
+}
+
+.btn {
+  width: 24%;
+  height: 16%;
+  font-size: 28px;
+}
+
+.adv-btn {
+  width: 23%;
+  height: 24%;
+  font-size: 28px;
+}
