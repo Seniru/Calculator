@@ -4,6 +4,7 @@ let openedBraces = 0;
 let inversed = false;
 let expCont = '';
 let temp = '';
+let memory = [];
 
 // unpacking Math object
 const {PI, sqrt, cbrt, sin, cos, tan, asin, acos, atan, log10, abs} = Math;
@@ -169,6 +170,12 @@ window.onload = () => {
     }
   };
 
+  document.getElementById('ans').onclick = () => {
+    if (memory.length !== 0 && (lastIsOperator() || input.value === '')) {
+      input.value = memory[memory.length - 1];
+    }
+  };
+
   document.getElementById('inverse').onclick = () => {
     inversed = !inversed;
     document.querySelectorAll('.inversable').forEach(x => {
@@ -253,16 +260,23 @@ const fact = n => n < 2 ? 1 : fact(n - 1) * n;
 
 // Gets the result of the expression
 function getResult (expression) {
+  let ans;
   let f = expression;
   for (let [k, v] of Object.entries(sym)) {
     f = f.replace(new RegExp(k, 'gi'), v);
   }
   try {
     exp.innerHTML = '';
-    return eval(f);
+    ans = eval(f);
+    return ans;
   } catch (e) {
     console.error('Error: ' + e.message);
     return expression;
+  } finally {
+    if (typeof ans !== 'undefined') {
+      memory.push(ans);
+      console.log(memory);
+    }
   }
 }
 
