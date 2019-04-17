@@ -154,8 +154,6 @@ window.onload = () => {
     }
   }, 300);
 
-
-
   // advanced button handlers here...
 
   // handler for buttons with common mathematical functions
@@ -260,6 +258,7 @@ function getResult (expression) {
     f = f.replace(new RegExp(k, 'gi'), v);
   }
   try {
+    exp.innerHTML = '';
     return eval(f);
   } catch (e) {
     console.error('Error: ' + e.message);
@@ -280,7 +279,7 @@ function formatExpression (ex) {
       operators: []
       functions: {}
   */
-  let chunks = ex.replace(/\(/g,"⟨").replace(/\)/g,"⟩").split('');
+  let chunks = ex.replace(/\(/g, '⟨').replace(/\)/g, '⟩').split('');
   let lastElemType = getType(chunks[0]);
   let formatted = formatDict[lastElemType];
   // let fragmentClosed = false;
@@ -291,7 +290,7 @@ function formatExpression (ex) {
       // fragmentClosed = false;
     } else {
       // TODO: search a way to format brackets -> Line 296 originally doesn't had that ternary operation
-      formatted += formatDictClosing[lastElemType] + formatDict[getType(c)] +  c;
+      formatted += formatDictClosing[lastElemType] + formatDict[getType(c)] + c;
       lastElemType = getType(c);
     }
   }
@@ -299,9 +298,11 @@ function formatExpression (ex) {
 }
 
 function formatToHTML (form) {
+  if (temp === '') {
+    return '';
+  }
   for (let [k, v] of Object.entries(htmlCode)) {
     form = form.replace(new RegExp(k, 'g'), v);
-    console.log(form);
   }
   return form;
 }
@@ -324,7 +325,6 @@ function changeTemp () {
   temp = '';
   Object.values(exp.children).forEach(x => {
     // checking if the element contains a bracket (generally span elements store brackets)
-    console.log(x.nodeName);
     if (x.nodeName === 'SPAN') {
       temp += x.innerText;
     } else {
@@ -332,6 +332,5 @@ function changeTemp () {
       temp += x.value;
     }
   });
-  console.log(temp);
   return temp;
 }
