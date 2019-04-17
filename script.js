@@ -5,6 +5,7 @@ let inversed = false;
 let expCont = '';
 let temp = '';
 let memory = [];
+let hist;
 
 // unpacking Math object
 const {PI, sqrt, cbrt, sin, cos, tan, asin, acos, atan, log10, abs} = Math;
@@ -81,6 +82,7 @@ const htmlCode = {
 window.onload = () => {
   input = document.querySelector('#input-panel');
   exp = document.querySelector('#expressions');
+  hist = document.querySelector('#history');
 
   document.querySelectorAll('.btn').forEach(x => {
     // Handler for button clicks
@@ -274,6 +276,7 @@ function getResult (expression) {
     return expression;
   } finally {
     if (typeof ans !== 'undefined') {
+      hist.innerHTML = expression + '<br /><b>' + ans + '</b><br /><hr />' + hist.innerHTML;
       memory.push(ans);
       console.log(memory);
     }

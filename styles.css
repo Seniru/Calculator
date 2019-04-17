@@ -1,10 +1,19 @@
 #expressions {
   background-color: #e0e0e0;
   width: 100%;
-  height: 26px;
+  height: 29px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow: scroll;
+  position: relative;
+  padding: 5px 0px 5px 0px;
 }
 
-#expressions > input, select {
+#expressions::-webkit-scrollbar {
+  display: none;
+}
+
+#expressions>input, select {
   width: 48px;
   text-align: center;
   background-color: transparent;
@@ -14,33 +23,60 @@
 
 #input-panel {
   width: 100%;
-  height: 30px;
-  font-size: 20px;
+  height: 38px;
+  font-size: 25px;
+  background-color: #f1f9f9;
+  border: 0px;
 }
 
 #normal {
   position: absolute;
-  width: 47%;
-  height: 80%;
-  padding-top: 10%;
+  width: 49%;
+  left: 50%;
+  height: 60%;
+  padding-top: 25px;
+}
+
+button {
+  width: 23%;
+  font-size: 17px;
+  padding: 0px;
+  border: 0px;
+  font-weight: bold;
+  border-radius: 3px;
+  margin-top: 4%;
 }
 
 #advanced {
-  width: 50%;
+  width: 47%;
   position: absolute;
-  left: 50%;
-  padding-top: 10%;
-  height: 80%;
+  padding-top: 25px;
+  height: 61%;
 }
 
 .btn {
-  width: 24%;
-  height: 16%;
-  font-size: 28px;
+  height: 15%;
 }
 
 .adv-btn {
-  width: 23%;
-  height: 24%;
-  font-size: 28px;
+  height: 23%;
 }
+
+#hist_container {
+  position: absolute;
+  bottom: 0%;
+  width: 100%;
+  height: 18%;
+}
+
+#history {
+  overflow: scroll;
+  max-height: 40%;
+}
+
+/*CSS media queries*/
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {}
