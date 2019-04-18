@@ -98,6 +98,9 @@ window.onload = () => {
             exp.innerText += input.value + '' + x.value;
             temp += input.value + '' + x.value;
             input.value = '';
+          } else if (lastIsOperator() && (temp !== '' || input.value !== '')) {
+             temp = temp.substring(0,temp.length-1) + x.value;
+             exp.innerText = temp
           }
         }
       // Checks if a function is associated with the button (like equals, sqrt, etc.)
