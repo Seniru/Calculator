@@ -105,14 +105,16 @@ window.onload = () => {
         switch (x.value) {
           case '=':
             // input.value = getResult(input.value);
-            if (input.value !== '') {
-              input.value = getResult(temp + input.value);
-              exp.innerText = '';
-              temp = '';
-            } else {
-              input.value = getResult(temp.substring(0, temp.length - 1) + input.value);
-              exp.innerText = '';
-              temp = '';
+            if (temp !== '' || input.value !== '') {
+              if (input.value !== '') {
+                input.value = getResult(temp + input.value);
+                exp.innerText = '';
+                temp = '';
+              } else {
+                input.value = getResult(temp.substring(0, temp.length - 1) + input.value);
+                exp.innerText = '';
+                temp = '';
+              }
             }
             break;
           case '.':
@@ -276,7 +278,7 @@ function getResult (expression) {
     return expression;
   } finally {
     if (typeof ans !== 'undefined') {
-      hist.innerHTML = expression + '<br /><b>' + ans + '</b><br /><hr />' + hist.innerHTML;
+      hist.innerHTML = '<var>' + expression + '</var><br /><b>' + ans + '</b><br /><hr />' + hist.innerHTML;
       memory.push(ans);
       console.log(memory);
     }
