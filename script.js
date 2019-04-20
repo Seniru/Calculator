@@ -16,7 +16,9 @@ const sym = {
   '√': 'sqrt',
   '∛': 'cbrt',
   MOD: '%',
-  '\\^': '**'
+  '\\^': '**',
+  '÷': '/',
+  '×': '*'
 };
 
 // dictionary for corresponding inversed function for each functions
@@ -53,8 +55,8 @@ const htmlCode = {
   '\\]': `</option>
     <option>+</option>
     <option>-</option>
-    <option>*</option>
-    <option>/</option>
+    <option>×</option>
+    <option>÷</option>
     <option>^</option>
     </select>
   `,
@@ -333,7 +335,7 @@ function formatToHTML (form) {
 function getType (elem) {
   if (/[\dπ.]/.test(elem)) {
     return 'number';
-  } else if (/(\+|-|\/|\*|\^)/.test(elem)) {
+  } else if (/(\+|-|\/|\*|\^|÷|×)/.test(elem)) {
     return 'operator';
   } else if (/[\w∛√]/.test(elem)) {
     return 'function';
