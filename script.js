@@ -89,6 +89,8 @@ window.onload = () => {
   document.querySelectorAll('.btn').forEach(x => {
     // Handler for button clicks
     x.onclick = () => {
+      // speak when a button click triggered
+      getSpeechText(x);
       // check if the button is a valued one and append it to the input panel
       if (x.name === 'value') {
         // check that the button is not an operator
@@ -101,8 +103,8 @@ window.onload = () => {
             temp += input.value + '' + x.value;
             input.value = '';
           } else if (lastIsOperator() && (temp !== '' || input.value !== '')) {
-             temp = temp.substring(0,temp.length-1) + x.value;
-             exp.innerText = temp
+            temp = temp.substring(0, temp.length - 1) + x.value;
+            exp.innerText = temp;
           }
         }
       // Checks if a function is associated with the button (like equals, sqrt, etc.)
@@ -170,22 +172,26 @@ window.onload = () => {
   document.querySelectorAll('.func').forEach(x => {
     x.onclick = () => {
       addFunction(x.value);
+      getSpeechText(x);
     };
   });
 
   document.getElementById('pi').onclick = () => {
     if (lastIsOperator() || input.value === '') {
       input.value = 'π';
+      responsiveVoice.speak('pi', 'UK English Female');
     }
   };
 
   document.getElementById('ans').onclick = () => {
     if (memory.length !== 0 && (lastIsOperator() || input.value === '')) {
       input.value = memory[memory.length - 1];
+      responsiceVoice.speak('previous answer', 'UK English Female');
     }
   };
 
   document.getElementById('inverse').onclick = () => {
+    responsiceVoice.speak('inversing', 'UK English Female');
     inversed = !inversed;
     document.querySelectorAll('.inversable').forEach(x => {
       // format the buttons for the inversed version
@@ -359,4 +365,15 @@ function changeTemp () {
     }
   });
   return temp;
+}
+
+// function for retriving speech text and speak the text
+function getSpeechText (elem) {
+  if (elem.getAttribute('speak') !== null && elem.getAttribute('speak') !== 'custom') {
+    responsiveVoice.cancel();
+    responsiveVoice.speak(elem.getAttribute('speak'), 'UK English Female');
+  } else if (elem.getAttribute('speak') === '!custom') {
+    responsiveVoice.cancel();
+    // responsiveVoice.speak
+  }
 }

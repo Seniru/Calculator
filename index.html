@@ -4,6 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculator</title>
+
+  <!--responsive voice api-->
+  <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
   <link rel="stylesheet" href="styles.css">
   <script src="script.js" charset="utf-8"></script>
 </head>
@@ -16,48 +19,48 @@
     </div>
     <section id='keypad'>
       <div id="advanced">
-        <button class="btn adv-btn" value="CE" name="func">CE</button>
-        <button class="adv-btn btn" value="C" name="func">C</button>
-        <button class="adv-btn" id="pi">π</button>
-        <button class="adv-btn" id="inverse">↑</button>
-        <button class="adv-btn inversable func" value="sin">sin</button>
-        <button class="adv-btn inversable func" value="cos">cos</button>
-        <button class="adv-btn inversable func" value="tan">tan</button>
+        <button class="btn adv-btn" value="CE" name="func" speak='Clearing the entry'>CE</button>
+        <button class="adv-btn btn" value="C" name="func" speak='Clearing all'>C</button>
+        <button class="adv-btn" id="pi" speak='pi'>π</button>
+        <button class="adv-btn" id="inverse" speak='Inversing'>↑</button>
+        <button class="adv-btn inversable func" value="sin" speak='sine'>sin</button>
+        <button class="adv-btn inversable func" value="cos" speak='cosine'>cos</button>
+        <button class="adv-btn inversable func" value="tan" speak='tangent'>tan</button>
         <button class="adv-btn inversable" value="deg">deg</button>
-        <button class="adv-btn func" value="fact">n!</button>
-        <button class="adv-btn func" value="√">√</button>
-        <button class="adv-btn func" value="∛">∛</button>
-        <button class="adv-btn func" value="log10">log</button>
-        <button class="adv-btn func" value="abs">| x |</button>
+        <button class="adv-btn func" value="fact" speak='factorail'>n!</button>
+        <button class="adv-btn func" value="√" speak='square root'>√</button>
+        <button class="adv-btn func" value="∛" speak='cube root'>∛</button>
+        <button class="adv-btn func" value="log10" speak='logarithm to to the base 10'>log</button>
+        <button class="adv-btn func" value="abs" speak='absolute value'>| x |</button>
         <button class="adv-btn">h</button>
         <button class="adv-btn">h</button>
         <button class="adv-btn">h</button>
       </div>
       <div id='sep'></div>
       <div id="normal">
-        <button class="btn" id="ans">ANS</button>
-        <button class="btn" value="()" name="func">()</button>
-        <button class="btn" value="←" name="func">←</button>
-        <button class="btn oprtr" value="^" name="value">x<sup>y</sup></button>
-        <button class="btn oprtr" value=" MOD " name="value">MOD</button>
-        <button class="btn" value="%" name="func">%</button>
-        <button class="btn oprtr" value="÷" name="value">÷</button>
-        <button class="btn" value="7" name="value">7</button>
-        <button class="btn" value="8" name="value">8</button>
-        <button class="btn" value="9" name="value">9</button>
-        <button class="btn oprtr" value="×" name="value">×</button>
-        <button class="btn" value="4" name="value">4</button>
-        <button class="btn" value="5" name="value">5</button>
-        <button class="btn" value="6" name="value">6</button>
+        <button class="btn" id="ans" speak='previous answer'>ANS</button>
+        <button class="btn" value="()" name="func" speak='!custom'>()</button>
+        <button class="btn" value="←" name="func" speak='backspace'>←</button>
+        <button class="btn oprtr" value="^" name="value" speak='expontation'>x<sup>y</sup></button>
+        <button class="btn oprtr" value=" MOD " name="value" speak='modulus'>MOD</button>
+        <button class="btn" value="%" name="func" speak='percentage'>%</button>
+        <button class="btn oprtr" value="÷" name="value" speak='divide by'>÷</button>
+        <button class="btn" value="7" name="value" speak='7'>7</button>
+        <button class="btn" value="8" name="value" speak='8'>8</button>
+        <button class="btn" value="9" name="value" speak='9'>9</button>
+        <button class="btn oprtr" value="×" name="value" speak='into'>×</button>
+        <button class="btn" value="4" name="value" speak='4'>4</button>
+        <button class="btn" value="5" name="value" speak='5'>5</button>
+        <button class="btn" value="6" name="value" speak='6'>6</button>
         <button class="btn oprtr" value="-" name="value">-</button>
-        <button class="btn" value="1" name="value">1</button>
-        <button class="btn" value="2" name="value">2</button>
-        <button class="btn" value="3" name="value">3</button>
-        <button class="btn oprtr" value="+" name="value">+</button>
-        <button class="btn" value="±" name="func">±</button>
-        <button class="btn" value="." name="func">.</button>
-        <button class="btn" value="0" name="value">0</button>
-        <button class="btn" value="=" name="func">=</button>
+        <button class="btn" value="1" name="value" speak='1'>1</button>
+        <button class="btn" value="2" name="value" speak='2'>2</button>
+        <button class="btn" value="3" name="value" speak='3'>3</button>
+        <button class="btn oprtr" value="+" name="value" speak='plus'>+</button>
+        <button class="btn" value="±" name="func" speak='negate'>±</button>
+        <button class="btn" value="." name="func" speak='point'>.</button>
+        <button class="btn" value="0" name="value" speak='zero'>0</button>
+        <button class="btn" value="=" name="func" speak='!custom'>=</button>
       </div>
     </section>
   </section>
