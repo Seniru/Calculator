@@ -16,7 +16,9 @@ const sym = {
   '√': 'sqrt',
   '∛': 'cbrt',
   MOD: '%',
-  '\\^': '**'
+  '\\^': '**',
+  '÷': '/',
+  '×': '*'
 };
 
 // dictionary for corresponding inversed function for each functions
@@ -53,8 +55,8 @@ const htmlCode = {
   '\\]': `</option>
     <option>+</option>
     <option>-</option>
-    <option>*</option>
-    <option>/</option>
+    <option>×</option>
+    <option>÷</option>
     <option>^</option>
     </select>
   `,
@@ -209,7 +211,7 @@ window.onload = () => {
 
 // Checks if the last value in the math input panel is an operator
 function lastIsOperator () {
-  return input.value === '' && (/(\.|\+|-|\/|\*|\^)/.test(temp.charAt(temp.length - 1)) || temp.endsWith('MOD '));
+  return input.value === '' && (/(\+|-|\/|\*|\^|÷|×)/.test(temp.charAt(temp.length - 1)) || temp.endsWith('MOD '));
 }
 
 // Checks if the decimal has been used in the input panel
@@ -281,6 +283,8 @@ function getResult (expression) {
     return expression;
   } finally {
     if (typeof ans !== 'undefined') {
+      // check if the no history message box exists and if yes remove it, otherwise silently ignore it.
+      document.querySelector('#no_hist_msg') ? document.querySelector('#no_hist_msg').remove() : false;
       hist.innerHTML = '<var>' + expression + '</var><br /><b>' + ans + '</b><br /><hr />' + hist.innerHTML;
       memory.push(ans);
       console.log(memory);
@@ -333,7 +337,7 @@ function formatToHTML (form) {
 function getType (elem) {
   if (/[\dπ.]/.test(elem)) {
     return 'number';
-  } else if (/(\+|-|\/|\*|\^)/.test(elem)) {
+  } else if (/(\+|-|\/|\*|\^|÷|×)/.test(elem)) {
     return 'operator';
   } else if (/[\w∛√]/.test(elem)) {
     return 'function';
