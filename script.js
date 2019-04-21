@@ -179,19 +179,19 @@ window.onload = () => {
   document.getElementById('pi').onclick = () => {
     if (lastIsOperator() || input.value === '') {
       input.value = 'π';
-      responsiveVoice.speak('pi', 'UK English Female');
+      responsiveVoice.speak('pi', 'US English Female');
     }
   };
 
   document.getElementById('ans').onclick = () => {
     if (memory.length !== 0 && (lastIsOperator() || input.value === '')) {
       input.value = memory[memory.length - 1];
-      responsiceVoice.speak('previous answer', 'UK English Female');
+      responsiveVoice.speak('previous answer', 'US English Female');
     }
   };
 
   document.getElementById('inverse').onclick = () => {
-    responsiceVoice.speak('inversing', 'UK English Female');
+    responsiveVoice.speak('inversing', 'US English Female');
     inversed = !inversed;
     document.querySelectorAll('.inversable').forEach(x => {
       // format the buttons for the inversed version
@@ -246,7 +246,7 @@ function handleBraces () {
   */
   if (temp === '' && input.value === '') {
     addBracket();
-  } else if (input.value === '' && (/(\+|-|\/|\*|\^)/.test(temp.charAt(temp.length - 1)) || temp.endsWith('MOD '))) {
+  } else if (input.value === '' && (/(\+|-|÷|×|\^)/.test(temp.charAt(temp.length - 1)) || temp.endsWith('MOD '))) {
     addBracket();
   } else if (openedBraces !== 0 && /\d/.test(input.value.charAt(input.value.length - 1))) {
     closeBracket();
@@ -262,12 +262,14 @@ function handleBraces () {
 function addBracket () {
   input.value += '(';
   openedBraces++;
+  responsiveVoice.speak('open bracket', 'US English Female');
 }
 
 // Method for closing brackets
 function closeBracket () {
   input.value += ')';
   openedBraces--;
+  responsiveVoice.speak('close bracket', 'US English Female');
 }
 
 // Calculates the factorial in the most famous one - liner method.
@@ -286,6 +288,7 @@ function getResult (expression) {
     return ans;
   } catch (e) {
     console.error('Error: ' + e.message);
+    responsiveVoice.speak('OOPS! An error occured', 'US English Female');
     return expression;
   } finally {
     if (typeof ans !== 'undefined') {
@@ -293,6 +296,8 @@ function getResult (expression) {
       document.querySelector('#no_hist_msg') ? document.querySelector('#no_hist_msg').remove() : false;
       hist.innerHTML = '<var>' + expression + '</var><br /><b>' + ans + '</b><br /><hr />' + hist.innerHTML;
       memory.push(ans);
+      responsiveVoice.speak('Equals ' + ans, 'US English Female');
+
       console.log(memory);
     }
   }
@@ -369,11 +374,11 @@ function changeTemp () {
 
 // function for retriving speech text and speak the text
 function getSpeechText (elem) {
-  if (elem.getAttribute('speak') !== null && elem.getAttribute('speak') !== 'custom') {
+  if (elem.getAttribute('speak') !== null && elem.getAttribute('speak') !== '!custom') {
     responsiveVoice.cancel();
-    responsiveVoice.speak(elem.getAttribute('speak'), 'UK English Female');
-  } else if (elem.getAttribute('speak') === '!custom') {
+    responsiveVoice.speak(elem.getAttribute('speak'), 'US English Female');
+  } else if (elem.getAttribute('speak') !== null && elem.getAttribute('speak') === '!custom') {
     responsiveVoice.cancel();
-    // responsiveVoice.speak
+    // do nothing
   }
 }

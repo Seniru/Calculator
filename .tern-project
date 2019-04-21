@@ -1,11 +1,18 @@
 {
   "ecmaVersion": "6",
   "libs": [],
-  "loadEagerly": [],
+  "loadEagerly": [
+    "https://code.responsivevoice.org/responsivevoice.js"
+  ],
   "dontLoad": [
     "node_modules/**"
   ],
   "plugins": {
-    "doc_comment": true
+    "doc_comment": true,
+    "modules": {
+      "dontLoad": "",
+      "load": "",
+      "modules": ""
+    }
   }
 }

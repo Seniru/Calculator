@@ -171,8 +171,7 @@ var {
 }
 
 #history > b {
-  margin-top: 6px;
-position: absolute;
+  
 font-family: sans-serif;
 color: #1cb5c8;
 }
