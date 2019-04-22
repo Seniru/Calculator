@@ -1,8 +1,34 @@
 let openedBraces = 0;
 
+// storing original trig functions
+let originalSin = Math.sin;
+let originalCos = Math.cos;
+let originalTan = Math.tan;
+
+// new trig functions which deals with degrees
+let newSin = (theta, mode) => {
+  return mode === 'd' ? originalSin(toDeg(theta)) : originalSin(theta);
+};
+let newCos = (theta, mode) => {
+  return mode === 'd' ? originalCos(toDeg(theta)) : originalCos(theta);
+};
+let newTan = (theta, mode) => {
+  return mode === 'd' ? originalTan(toDeg(theta)) : originalTan(theta);
+};
+
 // unpacking Math object
-const {
-  PI, sqrt, cbrt, sin, cos, tan, asin, acos, atan, log10, abs} = Math;
+let {PI, E, sqrt, cbrt, sin, cos, tan, asin, acos, atan, log10, abs} = Math;
+
+// modifying some of the trignometric functions in math object to deal with degreees
+sin = (theta) => {
+  return newSin(theta, mode);
+};
+cos = (theta) => {
+  return newCos(theta, mode);
+};
+tan = (theta) => {
+  return newTan(theta, mode);
+};
 
 // dictionary for holding special symbols
 const sym = {
@@ -71,9 +97,16 @@ const htmlCode = {
     `,
   '⟨': '<span>(</span>',
   '⟩': '<span>)</span>',
-  'π': PI
+  'π': PI,
+  E: E
 
 };
+
+// Converts radians into degrees and return it.
+function toDeg (rad) {
+  return rad * PI / 180;
+}
+
 // Checks if the last value in the math input panel is an operator
 function lastIsOperator () {
   return input.value === '' && (/(\+|-|\/|\*|\^|÷|×)/.test(temp.charAt(temp.length - 1)) || temp.endsWith('MOD '));
@@ -125,7 +158,6 @@ function closeBracket () {
 
 // Calculates the factorial in the most famous one - liner method.
 const fact = n => n < 2 ? 1 : fact(n - 1) * n;
-
 // Gets the result of the expression
 function getResult (expression) {
   let ans;

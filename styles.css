@@ -111,9 +111,6 @@ button:active {
   height: 23%;
 }
 
-button[value='←'] {
-  width: 48%;
-}
 
 button[value='C'], button[value='CE'], button[value='←'] {
   color: #e43030;
@@ -171,7 +168,7 @@ var {
 }
 
 #history > b {
-  
+
 font-family: sans-serif;
 color: #1cb5c8;
 }

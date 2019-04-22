@@ -5,6 +5,9 @@ let expCont = '';
 let temp = '';
 let memory = [];
 let hist;
+let mode = 'r'; // radian mode
+
+
 
 window.onload = () => {
   input = document.querySelector('#input-panel');
@@ -75,8 +78,18 @@ window.onload = () => {
               temp = '';
             }
             break;
+          case 'sin':
+            input.value = 'sin(' + input.value + ')';
+            break;
+          case 'cos':
+            input.value = 'cos(' + input.value + ')';
+            break;
+          case 'tan':
+            input.value = 'tan(' + input.value + ')';
+            break;
           case '()':
             handleBraces();
+            break;
         }
       }
     };
@@ -108,6 +121,12 @@ window.onload = () => {
     }
   };
 
+  document.getElementById('E').onclick = () => {
+    if (lastIsOperator() || input.value === '') {
+      input.value = 'E';
+      responsiveVoice.speak('e', 'US English Female');
+    }
+  }
   document.getElementById('ans').onclick = () => {
     if (memory.length !== 0 && (lastIsOperator() || input.value === '')) {
       input.value = memory[memory.length - 1];
@@ -138,9 +157,31 @@ window.onload = () => {
       }
     });
   };
+
+  document.getElementById('angle-mode').onclick = () => {
+    mode = mode === 'r' ? 'd' : 'r';
+  };
+
   // handler for keydown events
-  window.addEventListener('keydown', (e)=> {
-    document.querySelector("button[value='" + e.key.replace('Enter', '=').replace('/', '÷').replace('*', '×') + "']") ? document.querySelector("button[value='" + e.key.replace('Enter', '=').replace('/', '÷').replace('*', '×') + "']").click() :  false;
+  window.addEventListener('keydown', (e) => {
+    // True if an input has focus
+    let inputFocused;
+    console.log(e.key.replace('Enter', '='));
+    // Relavant key on the calculator to the key pressed on keyboard
+    let relBtn = document.querySelector("button[value='" + e.key.replace('Enter', '=').replace('/', '÷').replace('*', '×').replace('Backspace', '←') + "']");
+    for (let x of document.querySelectorAll('input')) {
+      if (x.matches(':focus')) {
+        inputFocused = true;
+        break;
+      }
+    }
+    if (!inputFocused && relBtn) {
+      if (relBtn.value === '=') {
+        document.querySelector('button[value="="]').click();
+      } else {
+        relBtn.click();
+      }
+    }
   });
 };
 
