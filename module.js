@@ -1,3 +1,5 @@
+//module.js
+
 let openedBraces = 0;
 
 // storing original trig functions
@@ -111,6 +113,10 @@ function toDeg (rad) {
 function lastIsOperator () {
   return input.value === '' && (/(\+|-|\/|\*|\^|÷|×)/.test(temp.charAt(temp.length - 1)) || temp.endsWith('MOD '));
 }
+// Checks  if the last symbol, π or E
+function lastIsNumber ( ) {
+    return /[\dπE]/.test(input.value.charAt(input.value.length-1));
+}
 
 // Checks if the decimal has been used in the input panel
 function hasDecimal () {
@@ -132,14 +138,25 @@ function handleBraces () {
     addBracket();
   } else if (input.value === '' && (/(\+|-|÷|×|\^)/.test(temp.charAt(temp.length - 1)) || temp.endsWith('MOD '))) {
     addBracket();
-  } else if (openedBraces !== 0 && /\d/.test(input.value.charAt(input.value.length - 1))) {
+  } else if (openedBraces !== 0 && lastIsNumber()) {
     closeBracket();
+} else if (openedBraces === 0 && lastIsNumber()) {
+exp.innerText += input.value + '×';
+        temp += input.value + '×';
+        input.value = "";
+        addBracket();
+
   } else if (input.value.endsWith('(') || temp.endsWith('(')) {
     addBracket();
   } else if ((input.value.endsWith(')') || temp.endsWith(')')) && openedBraces !== 0) {
     closeBracket();
-  }
-  console.log(openedBraces);
+  } else if ((input.value.endsWith(')') || temp.endsWith(')')) && openedBraces === 0) {
+exp.innerText += input.value + '×';
+        temp += input.value + '×';
+        exp.innerText += input.value + '×';
+        input.value = "";
+       addBracket();
+ } console.log(openedBraces);
 }
 
 // Method for appending brackets
@@ -266,3 +283,4 @@ function getSpeechText (elem) {
     // do nothing
   }
 }
+

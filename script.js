@@ -1,3 +1,6 @@
+
+//script.js
+
 let input;
 let exp;
 let inversed = false;
@@ -17,13 +20,19 @@ window.onload = () => {
   document.querySelectorAll('.btn').forEach(x => {
     // Handler for button clicks
     x.onclick = () => {
-      // speak when a button click triggered
-      getSpeechText(x);
+     
       // check if the button is a valued one and append it to the input panel
       if (x.name === 'value') {
         // check that the button is not an operator
         if (x.className.indexOf('oprtr') === -1) {
-          input.value += x.value;
+          //input.value += x.value;
+          if (lastIsOperator() || exp.innerHTML === '' || input.value.endsWith('(') || /\d+/.test(input.value.charAt(input.value.length - 1)) ){
+              input.value += x.value;
+          } else  {
+              exp.innerText += input.value + '×';
+        temp += input.value + '×';
+        input.value = x.value;
+          }
         } else {
           // if the button is an operator and the last is not an operator, the operator and previous entries in input will append to exp panel while clearing all the entries in the input panel.
           if (!lastIsOperator() && (temp !== '' || input.value !== '')) {
@@ -93,6 +102,8 @@ window.onload = () => {
         }
       }
       x.blur();
+      // speak when a button click triggered
+      getSpeechText(x);
     };
   });
 
@@ -111,36 +122,51 @@ window.onload = () => {
   document.querySelectorAll('.func').forEach(x => {
     x.onclick = () => {
       addFunction(x.value);
-      getSpeechText(x);
+      
       x.blur();
+      getSpeechText(x);
     };
   });
 
   document.getElementById('pi').onclick = () => {
-    if (lastIsOperator() || input.value === '') {
-      input.value = 'π';
-      responsiveVoice.speak('pi', 'US English Female');
-      document.getElementById('pi').blur();
+    if (lastIsOperator() || input.value === '' || input.value.endsWith('(')) {
+      input.value += 'π';          
+    } else if (lastIsNumber() || input.value.endsWith(')')) {
+        exp.innerText += input.value + '×';
+        temp += input.value + '×';
+        input.value = 'π';
     }
+    document.getElementById('pi').blur();
+      responsiveVoice.speak('pi', 'US English Female');
   };
 
   document.getElementById('E').onclick = () => {
-    if (lastIsOperator() || input.value === '') {
-      input.value = 'E';
-      responsiveVoice.speak('e', 'US English Female');
-      document.getElementById('E').blur();
+    if (lastIsOperator() || input.value === '' || input.value.endsWith('(')) {
+      input.value += 'E';
+      
+    } else if (lastIsNumber() ||input.value.endsWith(')')) {
+        exp.innerText += input.value + '×';
+        temp += input.value + '×';
+        input.value = 'E';
     }
+    document.getElementById('E').blur();
+      responsiveVoice.speak('e', 'US English Female');
   }
   document.getElementById('ans').onclick = () => {
     if (memory.length !== 0 && (lastIsOperator() || input.value === '')) {
       input.value = memory[memory.length - 1];
-      responsiveVoice.speak('previous answer', 'US English Female');
-      document.getElementById('ans').blur();
+      
+      } else if (memory.length !== 0 && lastIsNumber()) {
+        exp.innerText += input.value + '×';
+        temp += input.value + '×';
+        input.value = memory[memory.length - 1];
     }
+    document.getElementById('ans').blur();
+      responsiveVoice.speak('Previous answer', 'US English Female');
   };
 
   document.getElementById('inverse').onclick = () => {
-    responsiveVoice.speak('inversing', 'US English Female');
+    
     inversed = !inversed;
     document.querySelectorAll('.inversable').forEach(x => {
       // format the buttons for the inversed version
@@ -162,6 +188,7 @@ window.onload = () => {
       }
     });
     document.getElementById('inverse').blur();
+    responsiveVoice.speak('inversing', 'US English Female');
   };
 
   document.getElementById('angle-mode').onclick = () => {
