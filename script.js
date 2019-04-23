@@ -92,6 +92,7 @@ window.onload = () => {
             break;
         }
       }
+      x.blur();
     };
   });
 
@@ -111,6 +112,7 @@ window.onload = () => {
     x.onclick = () => {
       addFunction(x.value);
       getSpeechText(x);
+      x.blur();
     };
   });
 
@@ -118,6 +120,7 @@ window.onload = () => {
     if (lastIsOperator() || input.value === '') {
       input.value = 'π';
       responsiveVoice.speak('pi', 'US English Female');
+      document.getElementById('pi').blur();
     }
   };
 
@@ -125,12 +128,14 @@ window.onload = () => {
     if (lastIsOperator() || input.value === '') {
       input.value = 'E';
       responsiveVoice.speak('e', 'US English Female');
+      document.getElementById('E').blur();
     }
   }
   document.getElementById('ans').onclick = () => {
     if (memory.length !== 0 && (lastIsOperator() || input.value === '')) {
       input.value = memory[memory.length - 1];
       responsiveVoice.speak('previous answer', 'US English Female');
+      document.getElementById('ans').blur();
     }
   };
 
@@ -156,10 +161,12 @@ window.onload = () => {
         }
       }
     });
+    document.getElementById('inverse').blur();
   };
 
   document.getElementById('angle-mode').onclick = () => {
     mode = mode === 'r' ? 'd' : 'r';
+    document.getElementById('angle-mode').blur();
   };
 
   // handler for keydown events
@@ -168,7 +175,7 @@ window.onload = () => {
     let inputFocused;
     console.log(e.key.replace('Enter', '='));
     // Relavant key on the calculator to the key pressed on keyboard
-    let relBtn = document.querySelector("button[value='" + e.key.replace('Enter', '=').replace('/', '÷').replace('*', '×').replace('Backspace', '←') + "']");
+    let relBtn = document.querySelector("button[value='" + e.key.toUpperCase().replace('ENTER', '=').replace('/', '÷').replace('*', '×').replace('BACKSPACE', '←') + "']");
     for (let x of document.querySelectorAll('input')) {
       if (x.matches(':focus')) {
         inputFocused = true;
@@ -176,11 +183,7 @@ window.onload = () => {
       }
     }
     if (!inputFocused && relBtn) {
-      if (relBtn.value === '=') {
-        document.querySelector('button[value="="]').click();
-      } else {
-        relBtn.click();
-      }
+      relBtn.click();
     }
   });
 };
