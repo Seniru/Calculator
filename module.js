@@ -163,14 +163,14 @@ exp.innerText += input.value + '×';
 function addBracket () {
   input.value += '(';
   openedBraces++;
-  responsiveVoice.speak('open bracket', 'US English Female');
+  speak('Open Brakcet');
 }
 
 // Method for closing brackets
 function closeBracket () {
   input.value += ')';
   openedBraces--;
-  responsiveVoice.speak('close bracket', 'US English Female');
+  speak('close bracket');
 }
 
 // Calculates the factorial in the most famous one - liner method.
@@ -188,7 +188,7 @@ function getResult (expression) {
     return ans;
   } catch (e) {
     console.error('Error: ' + e.message);
-    responsiveVoice.speak('OOPS! An error occured', 'US English Female');
+    speak('OOPS! An error occured');
     return expression;
   } finally {
     if (typeof ans !== 'undefined') {
@@ -196,7 +196,7 @@ function getResult (expression) {
       document.querySelector('#no_hist_msg') ? document.querySelector('#no_hist_msg').remove() : false;
       hist.innerHTML = '<var>' + expression + '</var><br /><b>' + ans + '</b><br /><hr />' + hist.innerHTML;
       memory.push(ans);
-      responsiveVoice.speak('Equals ' + ans, 'US English Female');
+      speak('Equals ' + ans);
 
       console.log(memory);
     }
@@ -266,6 +266,14 @@ function changeTemp () {
   return temp;
 }
 
+// function for speak if soundEnabled and other factors are passed
+function speak (str) {
+  responsiveVoice.cancel();
+  if (soundEnabled) {
+    responsiveVoice.speak(str);
+  }
+}
+
 // Adds mathematical functions to the expressions
 function addFunction (func) {
   if (input.value !== '') {
@@ -276,11 +284,6 @@ function addFunction (func) {
 // function for retriving speech text and speak the text
 function getSpeechText (elem) {
   if (elem.getAttribute('speak') !== null && elem.getAttribute('speak') !== '!custom') {
-    responsiveVoice.cancel();
-    responsiveVoice.speak(elem.getAttribute('speak'), 'US English Female');
-  } else if (elem.getAttribute('speak') !== null && elem.getAttribute('speak') === '!custom') {
-    responsiveVoice.cancel();
-    // do nothing
+    speak(elem.getAttribute('speak'));
   }
 }
-
