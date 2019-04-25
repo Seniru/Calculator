@@ -63,7 +63,15 @@ window.onload = () => {
             break;
           case '.':
             if (!hasDecimal()) {
-              input.value += '.';
+              if (!lastIsOperator() && (temp !== '' || input.value !== '')) {
+            
+            input.value += '.';
+
+          } else if (lastIsOperator() && (temp !== '' || input.value !== '')) {
+            
+            input.value = '.';
+          }
+        
             }
             break;
           case '←':

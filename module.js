@@ -115,7 +115,7 @@ function lastIsOperator () {
 }
 // Checks  if the last symbol, π or E
 function lastIsNumber ( ) {
-    return /[\dπE]/.test(input.value.charAt(input.value.length-1));
+    return /[\dπE\.]/.test(input.value.charAt(input.value.length-1));
 }
 
 // Checks if the decimal has been used in the input panel
