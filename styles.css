@@ -179,6 +179,19 @@ border-color: #1cb5c8;
 margin: 8px 0px 8px 0px;
 }
 
+#menu-bar {
+  position: relative;
+padding: 2px;
+}
+
+.sound {
+  position: relative;
+  left: 90%;
+  border-radius: 50%;
+  background-color: red;
+  padding: 3px;
+}
+
 /*CSS media queries*/
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {}

@@ -1,5 +1,4 @@
-
-//script.js
+// script.js
 
 let input;
 let exp;
@@ -9,29 +8,28 @@ let temp = '';
 let memory = [];
 let hist;
 let mode = 'r'; // radian mode
-
-
+let soundEnabled = false;
 
 window.onload = () => {
   input = document.querySelector('#input-panel');
   exp = document.querySelector('#expressions');
   hist = document.querySelector('#history');
 
+  responsiveVoice.setDefaultVoice('US English Female');
+
   document.querySelectorAll('.btn').forEach(x => {
     // Handler for button clicks
     x.onclick = () => {
-     
       // check if the button is a valued one and append it to the input panel
       if (x.name === 'value') {
         // check that the button is not an operator
         if (x.className.indexOf('oprtr') === -1) {
-          //input.value += x.value;
-          if (lastIsOperator() || exp.innerHTML === '' || input.value.endsWith('(') || /\d+/.test(input.value.charAt(input.value.length - 1)) ){
-              input.value += x.value;
-          } else  {
-              exp.innerText += input.value + '×';
-        temp += input.value + '×';
-        input.value = x.value;
+          if (lastIsOperator() || exp.innerHTML === '' || input.value.endsWith('(') || /[\d\.]/.test(input.value.charAt(input.value.length - 1))) {
+            input.value += x.value;
+          } else {
+            exp.innerText += input.value + '×';
+            temp += input.value + '×';
+            input.value = x.value;
           }
         } else {
           // if the button is an operator and the last is not an operator, the operator and previous entries in input will append to exp panel while clearing all the entries in the input panel.
@@ -130,7 +128,7 @@ window.onload = () => {
   document.querySelectorAll('.func').forEach(x => {
     x.onclick = () => {
       addFunction(x.value);
-      
+
       x.blur();
       getSpeechText(x);
     };
@@ -138,43 +136,42 @@ window.onload = () => {
 
   document.getElementById('pi').onclick = () => {
     if (lastIsOperator() || input.value === '' || input.value.endsWith('(')) {
-      input.value += 'π';          
+      input.value += 'π';
     } else if (lastIsNumber() || input.value.endsWith(')')) {
-        exp.innerText += input.value + '×';
-        temp += input.value + '×';
-        input.value = 'π';
+      exp.innerText += input.value + '×';
+      temp += input.value + '×';
+      input.value = 'π';
     }
     document.getElementById('pi').blur();
-      responsiveVoice.speak('pi', 'US English Female');
+    speak('pi');
   };
 
   document.getElementById('E').onclick = () => {
     if (lastIsOperator() || input.value === '' || input.value.endsWith('(')) {
       input.value += 'E';
-      
-    } else if (lastIsNumber() ||input.value.endsWith(')')) {
-        exp.innerText += input.value + '×';
-        temp += input.value + '×';
-        input.value = 'E';
+
+    } else if (lastIsNumber() || input.value.endsWith(')')) {
+      exp.innerText += input.value + '×';
+      temp += input.value + '×';
+      input.value = 'E';
     }
     document.getElementById('E').blur();
-      responsiveVoice.speak('e', 'US English Female');
+    speak('e');
   }
   document.getElementById('ans').onclick = () => {
     if (memory.length !== 0 && (lastIsOperator() || input.value === '')) {
       input.value = memory[memory.length - 1];
-      
-      } else if (memory.length !== 0 && lastIsNumber()) {
-        exp.innerText += input.value + '×';
-        temp += input.value + '×';
-        input.value = memory[memory.length - 1];
+    } else if (memory.length !== 0 && lastIsNumber()) {
+      exp.innerText += input.value + '×';
+      temp += input.value + '×';
+      input.value = memory[memory.length - 1];
     }
     document.getElementById('ans').blur();
-      responsiveVoice.speak('Previous answer', 'US English Female');
+    speak('Previous answer');
   };
 
   document.getElementById('inverse').onclick = () => {
-    
+
     inversed = !inversed;
     document.querySelectorAll('.inversable').forEach(x => {
       // format the buttons for the inversed version
@@ -196,12 +193,23 @@ window.onload = () => {
       }
     });
     document.getElementById('inverse').blur();
-    responsiveVoice.speak('inversing', 'US English Female');
+    speak('inversing');
   };
 
   document.getElementById('angle-mode').onclick = () => {
     mode = mode === 'r' ? 'd' : 'r';
     document.getElementById('angle-mode').blur();
+  };
+
+  // Toggle the sounds
+  document.querySelector('.sound').onclick = () => {
+    if (!soundEnabled) {
+      soundEnabled = true;
+      document.getElementsByClassName('sound')[0].classList['value'] = 'fas fa-volume-up sound';
+    } else {
+      soundEnabled = false;
+      document.getElementsByClassName('sound')[0].classList['value'] = 'fas fa-volume-mute sound';
+    }
   };
 
   // handler for keydown events
