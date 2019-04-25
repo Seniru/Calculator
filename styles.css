@@ -180,12 +180,8 @@ margin: 8px 0px 8px 0px;
 }
 
 #menu-bar {
-  position: fixed;
+  position: relative;
 padding: 2px;
-height:20px;
-width:100%;
-background-color:transparent;
-z-index:10;
 }
 
 .sound {
