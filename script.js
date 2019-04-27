@@ -62,14 +62,10 @@ window.onload = () => {
           case '.':
             if (!hasDecimal()) {
               if (!lastIsOperator() && (temp !== '' || input.value !== '')) {
-            
-            input.value += '.';
-
-          } else if (lastIsOperator() && (temp !== '' || input.value !== '')) {
-            
-            input.value = '.';
-          }
-        
+                input.value += '.';
+              } else if (lastIsOperator() && (temp !== '' || input.value !== '')) {
+                input.value = '.';
+              }
             }
             break;
           case '←':
@@ -94,13 +90,13 @@ window.onload = () => {
             }
             break;
           case 'sin':
-            input.value = 'sin(' + input.value + ')';
+            addFunction('sin');
             break;
           case 'cos':
-            input.value = 'cos(' + input.value + ')';
+            addFunction('cos');
             break;
           case 'tan':
-            input.value = 'tan(' + input.value + ')';
+            addFunction('tan');
             break;
           case '()':
             handleBraces();
@@ -120,6 +116,7 @@ window.onload = () => {
       expCont = exp.innerHTML;
       console.log(temp);
     }
+
   }, 300);
 
   // advanced button handlers here...
@@ -234,4 +231,9 @@ window.onload = () => {
 // Handler for content changes
 function oncontent () {
   exp.innerHTML = formatToHTML(formatExpression(temp));
+  for (let x of exp.children) {
+    if (x.nodeName === 'INPUT') {
+      resizable(x);
+    }
+  }
 }

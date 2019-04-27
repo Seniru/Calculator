@@ -20,18 +20,18 @@ padding: 5px 0px 5px 15px;
 }
 
 #expressions>input, select {
-  width: 48px;
+  min-width: 48px !important;
 text-align: center;
 background-color: #036d78;
 border: 0;
 margin: -5px;
 font-family: monospace;
-color: white;
 }
 
 #expressions > span {
-  font-family: monospace;
-  color: white;
+    font-family: monospace;
+color: white;
+margin: 0px 5px 0px 5px;
 }
 #input-panel {
   width: 100%;
@@ -136,6 +136,21 @@ button[value='=']:active {
   background-color: rgba(28, 181, 200, 0.48);
 }
 
+input[type='number'] {
+  color: #f3ef52;
+  /* width: 99px; */
+}
+
+.oprtr-model {
+  width: 30px;
+color: #e66565;
+}
+
+.func-model {
+  width: 56px;
+  color: #d596f5;
+}
+
 #hist_container {
   position: absolute;
   bottom: 0%;
@@ -180,8 +195,11 @@ margin: 8px 0px 8px 0px;
 }
 
 #menu-bar {
-  position: relative;
+  position: absolute;
 padding: 2px;
+z-index: 5;
+width: 15%;
+left: 78%;
 }
 
 .sound {

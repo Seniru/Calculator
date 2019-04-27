@@ -40,7 +40,8 @@ const sym = {
   MOD: '%',
   '\\^': '**',
   '÷': '/',
-  '×': '*'
+  '×': '*',
+  'log': 'log10'
 };
 
 // dictionary for corresponding inversed function for each functions
@@ -72,7 +73,7 @@ const htmlCode = {
   '<': "<input onchange='changeTemp()' type='number' value='",
   '>': "'>",
   '\\[': `
-      <select onchange='changeTemp()'>
+      <select class='oprtr-model' onchange='changeTemp()'>
         <option>`,
   '\\]': `</option>
       <option>+</option>
@@ -82,7 +83,7 @@ const htmlCode = {
       <option>^</option>
       </select>
     `,
-  '\\{': `<select onchange='changeTemp()'><option>`,
+  '\\{': `<select class='func-model' onchange='changeTemp()'><option>`,
   '\\}': `</option>
     <option>sin</option>
     <option>cos</option>
@@ -91,7 +92,7 @@ const htmlCode = {
     <option>acos</option>
     <option>atan</option>
     <option>fact</option>
-    <option>log10</option>
+    <option>log</option>
     <option>abs</option>
     <option>√</option>
     <option>∛</option>
@@ -140,23 +141,23 @@ function handleBraces () {
     addBracket();
   } else if (openedBraces !== 0 && lastIsNumber()) {
     closeBracket();
-} else if (openedBraces === 0 && lastIsNumber()) {
-exp.innerText += input.value + '×';
-        temp += input.value + '×';
-        input.value = "";
-        addBracket();
+  } else if (openedBraces === 0 && lastIsNumber()) {
+    exp.innerText += input.value + '×';
+    temp += input.value + '×';
+    input.value = "";
+    addBracket();
 
   } else if (input.value.endsWith('(') || temp.endsWith('(')) {
     addBracket();
   } else if ((input.value.endsWith(')') || temp.endsWith(')')) && openedBraces !== 0) {
     closeBracket();
   } else if ((input.value.endsWith(')') || temp.endsWith(')')) && openedBraces === 0) {
-exp.innerText += input.value + '×';
-        temp += input.value + '×';
-        exp.innerText += input.value + '×';
-        input.value = "";
-       addBracket();
- } console.log(openedBraces);
+    exp.innerText += input.value + '×';
+    temp += input.value + '×';
+    exp.innerText += input.value + '×';
+    input.value = "";
+    addBracket();
+  }
 }
 
 // Method for appending brackets
@@ -261,6 +262,7 @@ function changeTemp () {
     } else {
       // add the value stored in the element if it is not a span (bracket)
       temp += x.value;
+      resizable(x);
     }
   });
   return temp;
@@ -286,4 +288,14 @@ function getSpeechText (elem) {
   if (elem.getAttribute('speak') !== null && elem.getAttribute('speak') !== '!custom') {
     speak(elem.getAttribute('speak'));
   }
+}
+
+/*
+  *Changes the width of input fields according to the number of characters in it
+  *Credits: Max Chuhryaev - Codepen (link: https://codepen.io/w3core/pen/DjLml)
+*/
+function resizable (el, factor) {
+  var int = Number(factor) || 7.7;
+  function resize () { el.style.width = ((el.value.length + 1) * int) + 'px'; }
+  resize();
 }
