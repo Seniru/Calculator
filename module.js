@@ -1,4 +1,4 @@
-//module.js
+// module.js
 
 let openedBraces = 0;
 
@@ -19,7 +19,7 @@ let newTan = (theta, mode) => {
 };
 
 // unpacking Math object
-let {PI, E, sqrt, cbrt, sin, cos, tan, asin, acos, atan, log10, abs} = Math;
+let {PI, E, sqrt, cbrt, sin, cos, tan, asin, acos, atan, log10, log, abs, random} = Math;
 
 // modifying some of the trignometric functions in math object to deal with degreees
 sin = (theta) => {
@@ -41,7 +41,8 @@ const sym = {
   '\\^': '**',
   '÷': '/',
   '×': '*',
-  'log': 'log10'
+  log: 'log10',
+  ln: 'log'
 };
 
 // dictionary for corresponding inversed function for each functions
