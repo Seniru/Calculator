@@ -1,4 +1,4 @@
-// module.js
+//module.js
 
 let openedBraces = 0;
 
@@ -19,7 +19,7 @@ let newTan = (theta, mode) => {
 };
 
 // unpacking Math object
-let {PI, E, sqrt, cbrt, sin, cos, tan, asin, acos, atan, log10, log, abs, random} = Math;
+let {PI, E, sqrt, cbrt, sin, cos, tan, asin, acos, atan, log10, abs} = Math;
 
 // modifying some of the trignometric functions in math object to deal with degreees
 sin = (theta) => {
@@ -41,8 +41,7 @@ const sym = {
   '\\^': '**',
   '÷': '/',
   '×': '*',
-  log: 'log10',
-  ln: 'log'
+  'log': 'log10'
 };
 
 // dictionary for corresponding inversed function for each functions
@@ -175,6 +174,27 @@ function closeBracket () {
   speak('close bracket');
 }
 
+// Deletes the last number, symbol or function
+function back () {
+    let last = input.value.charAt(input.value.length - 1);
+    if (/[\d\.πE]/i.test(last)) {
+        input.value = input.value.substring(0, input.value.length - 1);
+    } else if (last === ')') {
+        // Removing a closed bracket results in extra unclosed brackets.
+        openedBraces++;
+        input.value = input.value.substring(0, input.value.length - 1);
+    } else if (last === '(') {
+        openedBraces--;
+        input.value = input.value.substring(0, input.value.length - 1);
+    } else if (/[a-zA-Z]/i.test(last)) {
+        // removing all the characters related to a single function using a recursive method
+        input.value = input.value.substring(0, input.value.length - 1);
+        back();
+    }
+    
+}
+
+
 // Calculates the factorial in the most famous one - liner method.
 const fact = n => n < 2 ? 1 : fact(n - 1) * n;
 // Gets the result of the expression
@@ -300,3 +320,4 @@ function resizable (el, factor) {
   function resize () { el.style.width = ((el.value.length + 1) * int) + 'px'; }
   resize();
 }
+

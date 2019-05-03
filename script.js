@@ -1,4 +1,7 @@
+
 // script.js
+
+console.log = () => {}
 
 let input;
 let exp;
@@ -70,7 +73,7 @@ window.onload = () => {
             }
             break;
           case '←':
-            input.value = input.value.substring(0, input.value.length - 1);
+            back();            
             break;
           case 'C':
             input.value = '';
@@ -148,6 +151,7 @@ window.onload = () => {
   document.getElementById('E').onclick = () => {
     if (lastIsOperator() || input.value === '' || input.value.endsWith('(')) {
       input.value += 'E';
+
     } else if (lastIsNumber() || input.value.endsWith(')')) {
       exp.innerText += input.value + '×';
       temp += input.value + '×';
@@ -156,19 +160,6 @@ window.onload = () => {
     document.getElementById('E').blur();
     speak('e');
   }
-
-  document.getElementById('rand').onclick = () => {
-    if (lastIsOperator() || input.value === '' || input.value.endsWith('(')) {
-      input.value += random();
-    } else if (lastIsNumber() || input.value.endsWith(')')) {
-      exp.innerText += input.value + '×';
-      temp += input.value + '×';
-      input.value = random();
-    }
-    document.getElementById('random').blur();
-    speak('random number');
-  }
-
   document.getElementById('ans').onclick = () => {
     if (memory.length !== 0 && (lastIsOperator() || input.value === '')) {
       input.value = memory[memory.length - 1];
