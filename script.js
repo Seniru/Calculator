@@ -49,14 +49,15 @@ window.onload = () => {
             // input.value = getResult(input.value);
             if (temp !== '' || input.value !== '') {
               if (input.value !== '') {
-                input.value = getResult(temp + input.value);
+                input.value = getResult(temp + input.value + ')'.repeat(openedBraces));
                 exp.innerText = '';
                 temp = '';
               } else {
-                input.value = getResult(temp.substring(0, temp.length - 1) + input.value);
+                input.value = getResult(temp.substring(0, temp.length - 1) + input.value + ')'.repeat(openedBraces));
                 exp.innerText = '';
                 temp = '';
               }
+              openedBraces = 0;
             }
             break;
           case '.':
@@ -75,6 +76,7 @@ window.onload = () => {
             input.value = '';
             exp.innerText = '';
             temp = '';
+            openedBraces = 0;
             break;
           case 'CE':
             input.value = '';
