@@ -160,6 +160,19 @@ window.onload = () => {
     document.getElementById('E').blur();
     speak('e');
   }
+  
+  document.getElementById('rand').onclick = () => {
+    if (lastIsOperator() || input.value === '' || input.value.endsWith('(')) {
+      input.value += random();
+    } else if (lastIsNumber() || input.value.endsWith(')')) {
+      exp.innerText += input.value + '×';
+      temp += input.value + '×';
+      input.value = random();
+    }
+    document.getElementById('random').blur();
+    speak('random number');
+  }
+
   document.getElementById('ans').onclick = () => {
     if (memory.length !== 0 && (lastIsOperator() || input.value === '')) {
       input.value = memory[memory.length - 1];
