@@ -5,16 +5,15 @@ body {
 
 #expressions {
   color: #ffffff;
-background-color: rgba(0, 108, 119, 0.99);
-width: 100%;
-height: 29px;
--ms-overflow-style: none;
-scrollbar-width: none;
-overflow: scroll;
-position: relative;
-padding: 5px 0px 5px 15px;
+  background-color: rgba(0, 108, 119, 0.99);
+  width: 100%;
+  height: 29px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow: scroll;
+  position: relative;
+  padding: 5px 0px 5px 15px;
 }
-
 
 #expressions::-webkit-scrollbar {
   display: none;
@@ -22,30 +21,28 @@ padding: 5px 0px 5px 15px;
 
 #expressions>input, select {
   min-width: 48px !important;
-text-align: center;
-background-color: #036d78;
-border: 0;
-margin: -5px;
-font-family: monospace;
+  text-align: center;
+  background-color: #036d78;
+  border: 0;
+  margin: -5px;
+  font-family: monospace;
 }
 
-#expressions > span {
-    font-family: monospace;
-color: white;
-margin: 0px 5px 0px 5px;
+#expressions>span {
+  font-family: monospace;
+  color: white;
+  margin: 0px 5px 0px 5px;
 }
+
 #input-panel {
   width: 100%;
-    height: 50px;
-    font-size: 25px;
-    background-color: rgba(28, 181, 200, 0.05);
-    border: 0px;
-    padding: 10px;
-    font-family: monospace;
-
+  height: 50px;
+  font-size: 25px;
+  background-color: rgba(28, 181, 200, 0.05);
+  border: 0px;
+  padding: 10px;
+  font-family: monospace;
 }
-
-
 
 #normal {
   position: absolute;
@@ -60,9 +57,9 @@ margin: 0px 5px 0px 5px;
   position: absolute;
   background-color: rgba(0, 0, 0, 0.21);
   width: 1px;
-  height: 65%;
+  height: 60%;
   left: 50%;
-  top: 17%;
+  top: 27%;
 }
 
 button {
@@ -105,13 +102,12 @@ button:active {
 }
 
 .btn {
-  height: 15%;
+  height: 14%;
 }
 
 .adv-btn {
   height: 23%;
 }
-
 
 button[value='C'], button[value='CE'], button[value='←'] {
   color: #e43030;
@@ -144,7 +140,7 @@ input[type='number'] {
 
 .oprtr-model {
   width: 30px;
-color: #e66565;
+  color: #e66565;
 }
 
 .func-model {
@@ -154,9 +150,10 @@ color: #e66565;
 
 #hist_container {
   position: absolute;
-  bottom: 0%;
+  bottom: -2%;
   width: 100%;
   height: 18%;
+  padding-left: 10px;
 }
 
 #history {
@@ -165,42 +162,45 @@ color: #e66565;
   -ms-overflow-style: none;
   scrollbar-width: none;
   padding-top: 3px;
+  top: -32%;
+  position: relative;
 }
 
 #history::-webkit-scrollbar {
   display: none;
 }
 
-#hist_container > h5 {
+#hist_container>h5 {
   color: #1cb5c8;
-font-size: 18px;
-font-weight: normal;
+  font-size: 18px;
+  font-weight: normal;
+  top: -15%;
+  position: relative;
 }
 
 var {
   font-family: monospace;
-    border: 1px solid #9c9c9c;
-    padding: 2px;
+  border: 1px solid #9c9c9c;
+  padding: 2px;
 }
 
-#history > b {
-
-font-family: sans-serif;
-color: #1cb5c8;
+#history>b {
+  font-family: sans-serif;
+  color: #1cb5c8;
 }
 
-#history > hr {
+#history>hr {
   border-width: 0.5px;
-border-color: #1cb5c8;
-margin: 8px 0px 8px 0px;
+  border-color: #1cb5c8;
+  margin: 8px 0px 8px 0px;
 }
 
 #menu-bar {
   position: absolute;
-padding: 2px;
-z-index: 5;
-width: 15%;
-left: 78%;
+  padding: 2px;
+  z-index: 5;
+  width: 15%;
+  left: 78%;
 }
 
 .sound {
@@ -217,6 +217,15 @@ left: 78%;
 
 .sound:hover {
   background-color: red;
+}
+
+.memory-btn {
+  width: 19%;
+  margin: 0;
+  height: 20px;
+  position: relative;
+  font-size: 12px;
+  padding: 3px;
 }
 
 /*CSS media queries*/
@@ -241,5 +250,17 @@ left: 78%;
     height: 100%;
     left: 75%;
     top: 15%;
+  }
+
+  #hist_container>h5 {
+    top: 1px;
+  }
+
+  #history {
+    top: 1px;
+  }
+
+  #memory-box {
+    width: 75%;
   }
 }

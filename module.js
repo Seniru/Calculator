@@ -178,24 +178,22 @@ function closeBracket () {
 
 // Deletes the last number, symbol or function
 function back () {
-    let last = input.value.charAt(input.value.length - 1);
-    if (/[\d\.πE]/i.test(last)) {
-        input.value = input.value.substring(0, input.value.length - 1);
-    } else if (last === ')') {
-        // Removing a closed bracket results in extra unclosed brackets.
-        openedBraces++;
-        input.value = input.value.substring(0, input.value.length - 1);
-    } else if (last === '(') {
-        openedBraces--;
-        input.value = input.value.substring(0, input.value.length - 1);
-    } else if (/[a-zA-Z]/i.test(last)) {
-        // removing all the characters related to a single function using a recursive method
-        input.value = input.value.substring(0, input.value.length - 1);
-        back();
-    }
-    
+  let last = input.value.charAt(input.value.length - 1);
+  if (/[\d\.πE]/i.test(last)) {
+    input.value = input.value.substring(0, input.value.length - 1);
+  } else if (last === ')') {
+    // Removing a closed bracket results in extra unclosed brackets.
+    openedBraces++;
+    input.value = input.value.substring(0, input.value.length - 1);
+  } else if (last === '(') {
+    openedBraces--;
+    input.value = input.value.substring(0, input.value.length - 1);
+  } else if (/[a-zA-Z]/i.test(last)) {
+    // removing all the characters related to a single function using a recursive method
+    input.value = input.value.substring(0, input.value.length - 1);
+    back();
+  }
 }
-
 
 // Calculates the factorial in the most famous one - liner method.
 const fact = n => n < 2 ? 1 : fact(n - 1) * n;
@@ -221,8 +219,6 @@ function getResult (expression) {
       hist.innerHTML = '<var>' + expression + '</var><br /><b>' + ans + '</b><br /><hr />' + hist.innerHTML;
       memory.push(ans);
       speak('Equals ' + ans);
-
-      console.log(memory);
     }
   }
 }
@@ -239,7 +235,6 @@ function formatExpression (ex) {
   let formatted = formatDict[lastElemType];
   // let fragmentClosed = false;
   for (let c of chunks) {
-    console.log(c + ':  ' + getType(c));
     if (getType(c) === lastElemType) {
       formatted += c;
       // fragmentClosed = false;
@@ -295,7 +290,7 @@ function changeTemp () {
 function speak (str) {
   responsiveVoice.cancel();
   if (soundEnabled) {
-    responsiveVoice.speak(str);
+  responsiveVoice.speak(str);
   }
 }
 
@@ -322,4 +317,3 @@ function resizable (el, factor) {
   function resize () { el.style.width = ((el.value.length + 1) * int) + 'px'; }
   resize();
 }
-

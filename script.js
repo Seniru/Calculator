@@ -1,7 +1,7 @@
 
 // script.js
 
-console.log = () => {}
+console.log = () => {};
 
 let input;
 let exp;
@@ -12,14 +12,17 @@ let memory = [];
 let hist;
 let mode = 'r'; // radian mode
 let soundEnabled = false;
+let memValue = 0;
 
 window.onload = () => {
   input = document.querySelector('#input-panel');
   exp = document.querySelector('#expressions');
   hist = document.querySelector('#history');
 
-  responsiveVoice.setDefaultVoice('US English Female');
-
+  try {
+    responsiveVoice.setDefaultVoice('US English Female');
+  } catch (e) {
+  }
   document.querySelectorAll('.btn').forEach(x => {
     // Handler for button clicks
     x.onclick = () => {
@@ -73,7 +76,7 @@ window.onload = () => {
             }
             break;
           case '←':
-            back();            
+            back();
             break;
           case 'C':
             input.value = '';
@@ -119,9 +122,7 @@ window.onload = () => {
     if (exp.innerHTML !== expCont) {
       oncontent();
       expCont = exp.innerHTML;
-      console.log(temp);
     }
-
   }, 300);
 
   // advanced button handlers here...
@@ -160,7 +161,7 @@ window.onload = () => {
     document.getElementById('E').blur();
     speak('e');
   }
-  
+
   document.getElementById('rand').onclick = () => {
     if (lastIsOperator() || input.value === '' || input.value.endsWith('(')) {
       input.value += random();
@@ -186,13 +187,12 @@ window.onload = () => {
   };
 
   document.getElementById('inverse').onclick = () => {
-
     inversed = !inversed;
     document.querySelectorAll('.inversable').forEach(x => {
       // format the buttons for the inversed version
       if (inversed) {
-        document.getElementById('inverse').style.backgroundColor = 'rgb(144, 223, 228)';
-        x.style.backgroundColor = 'rgb(144, 223, 228)';
+        document.getElementById('inverse').style.backgroundColor = 'rgb(7, 186, 197)';
+        x.style.backgroundColor = 'rgb(7, 186, 197)';
         x.innerHTML = inverseDict[x.value];
         x.value = inverseDict[x.value];
         // format the button for the normal version
@@ -213,6 +213,7 @@ window.onload = () => {
 
   document.getElementById('angle-mode').onclick = () => {
     mode = mode === 'r' ? 'd' : 'r';
+    document.getElementById('angle-mode').innerHTML = mode === 'r' ? 'deg' : 'rad';
     document.getElementById('angle-mode').blur();
   };
 
@@ -227,11 +228,44 @@ window.onload = () => {
     }
   };
 
+  // Events related to memory operation
+
+  Object.values(document.getElementsByClassName('memory-btn')).forEach(x => {
+    x.onclick = (e) => {
+      switch (e.target.id) {
+        case 'm+':
+          document.querySelector("button[value='=']").click();
+          memValue += Number(input.value);
+          break;
+        case 'm-':
+          document.querySelector("button[value='=']").click();
+          memValue += Number(input.value);
+          break;
+        case 'ms':
+          document.querySelector("button[value='=']").click();
+          memValue = Number(input.value);
+          break;
+        case 'mc':
+          memValue = 0;
+          break;
+        case 'mr':
+          if (memory.length !== 0 && (lastIsOperator() || input.value === '')) {
+            input.value = memValue;
+          } else if (memory.length !== 0 && lastIsNumber()) {
+            exp.innerText += input.value + '×';
+            temp += input.value + '×';
+            input.value = memValue;
+          }
+          break;
+      }
+      x.blur();
+    };
+  });
+
   // handler for keydown events
   window.addEventListener('keydown', (e) => {
     // True if an input has focus
     let inputFocused;
-    console.log(e.key.replace('Enter', '='));
     // Relavant key on the calculator to the key pressed on keyboard
     let relBtn = document.querySelector("button[value='" + e.key.toUpperCase().replace('ENTER', '=').replace('/', '÷').replace('*', '×').replace('BACKSPACE', '←') + "']");
     for (let x of document.querySelectorAll('input')) {
