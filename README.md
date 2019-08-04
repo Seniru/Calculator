@@ -6,7 +6,7 @@
 **What is this?**
 Calculator is an app made for simplifying your calculations more! Supports lots of mathematical functions. It also allows you to edit expressions without letting you to make any error.
 ## How to use
-Sorry! We are still not ready for deployment
+Simple! Just follow [this](https://senirupasan.000webhostapp.com/calculator) link. 
 
 ## Contributing
 First, thanks a lot for contributing. You can contribute this project in many ways.
