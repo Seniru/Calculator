@@ -3,6 +3,9 @@
 
 > A fancy calculator with lot's of awesome features.
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
+
 **What is this?**
 Calculator is an app made for simplifying your calculations more! Supports lots of mathematical functions. It also allows you to edit expressions without letting you to make any error.
 ## How to use
@@ -32,6 +35,3 @@ Make sure you are making changes to the code according to these standards specif
 
 ## Authors 
 [Seniru Pasan Indira](https://github.com/Seniru/)
-
-## LICENSE 
-MIT License 
