@@ -5,6 +5,8 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
+![image](https://github.com/Seniru/Calculator/assets/34127015/6a7df1db-31f9-470f-976c-5e180d2dab4c)
+
 
 **What is this?**
 Calculator is an app made for simplifying your calculations more! Supports lots of mathematical functions. It also allows you to edit expressions without letting you to make any error.
